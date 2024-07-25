@@ -1,0 +1,27 @@
+version: '3'
+services:
+  solr:
+    image: solr:9
+    ports:
+     - "8983:8983"
+    volumes:
+      - ./solr_data:/var/solr
+      - ./solr_config:/opt/solr/server/solr/configsets/myconfig
+    command:
+      - solr-precreate
+      - mycore
+      - /opt/solr/server/solr/configsets/myconfig
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    volumes:
+      - ./www:/var/www/html
+    ports:
+      - "80:80"
+    command: >
+      bash -c "composer update --working-dir=/var/www/html &&
+               apache2-foreground"
+    depends_on:
+      - solr

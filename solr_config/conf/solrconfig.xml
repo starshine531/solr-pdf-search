@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+  <luceneMatchVersion>8.0.0</luceneMatchVersion>
+  <dataDir>${solr.data.dir:}</dataDir>
+  <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.NRTCachingDirectoryFactory}"/>
+  <codecFactory class="solr.SchemaCodecFactory"/>
+  <schemaFactory class="ClassicIndexSchemaFactory" />
+
+  <requestHandler name="/select" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="df">content</str>
+    </lst>
+  </requestHandler>
+
+  <requestHandler name="/update" class="solr.UpdateRequestHandler"/>
+
+  <requestHandler name="/update/extract" class="solr.extraction.ExtractingRequestHandler">
+    <lst name="defaults">
+      <str name="fmap.content">content</str>
+      <str name="lowernames">true</str>
+      <str name="uprefix">ignored_</str>
+    </lst>
+  </requestHandler>
+
+  <lib dir="${solr.install.dir:../../../..}/contrib/extraction/lib" regex=".*\.jar"/>
+  <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-cell-\d.*\.jar"/>
+</config>
+

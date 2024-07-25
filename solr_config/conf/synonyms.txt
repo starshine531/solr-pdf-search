@@ -1,0 +1,3 @@
+# Some example synonym pairs
+GB,gib,gigabyte,gigabytes
+TV,television
