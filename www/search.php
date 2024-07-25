@@ -26,8 +26,8 @@ try {
     // Set up highlighting
     $hl = $query->getHighlighting();
     $hl->setFields('content');
-    $hl->setSimplePrefix('<b>'); // HTML tag to prefix the highlighted term
-    $hl->setSimplePostfix('</b>'); // HTML tag to postfix the highlighted term
+    $hl->setSimplePrefix('<font color="red"><b>'); // HTML tag to prefix the highlighted term
+    $hl->setSimplePostfix('</b></font>'); // HTML tag to postfix the highlighted term
 
     $hl->setFragSize(150); // Set fragment size to 150 characters
     $hl->setSnippets(3); // Return up to 3 highlighted snippets per field
