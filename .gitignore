@@ -1,2 +1,4 @@
 solr_data/
 www/vendor/
+www/pdfs/*
+!www/pdfs/lorem-ipsum.pdf
