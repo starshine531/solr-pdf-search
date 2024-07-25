@@ -7,7 +7,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 $config = [
     'endpoint' => [
-        'localhost' => [
+        'search' => [
             'host' => 'solr',
             'port' => 8983,
             'path' => '/',
@@ -40,17 +40,20 @@ try {
     $highlighting = $resultset->getHighlighting();
 
     foreach ($resultset as $document) {
-        echo "ID: " . $document->id . "\n";
+        echo "ID: " . $document->id . "\n\n";
         
         // Get highlighted snippet if available, otherwise use regular content
         $highlightedDoc = $highlighting->getResult($document->id);
         if ($highlightedDoc && !empty($highlightedDoc->getField('content'))) {
-            $snippet = implode(' ... ', $highlightedDoc->getField('content'));
+            $snippet = implode("\n\n", $highlightedDoc->getField('content'));
         } else {
             $snippet = substr($document->content, 0, 200);
         }
         
-        echo "Content snippet: " . $snippet . "...\n\n";
+        echo "Content snippet:\n\n";
+        echo '<div style="border: 1px solid #000; padding: 10px; display: inline-block;">';
+        echo $snippet;
+        echo "</div>\n\n";
     }
 } catch (Exception $e) {
     echo "An error occurred: " . $e->getMessage();
