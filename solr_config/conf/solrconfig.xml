@@ -9,6 +9,9 @@
   <requestHandler name="/select" class="solr.SearchHandler">
     <lst name="defaults">
       <str name="df">content</str>
+      <str name="df">title</str>
+      <str name="df">author</str>
+      <str name="df">subject</str>
     </lst>
   </requestHandler>
 
@@ -18,6 +21,7 @@
     <lst name="defaults">
       <str name="fmap.content">content</str>
       <str name="lowernames">true</str>
+      <!--<str name="captureAttr">true</str>-->
       <str name="uprefix">ignored_</str>
     </lst>
   </requestHandler>

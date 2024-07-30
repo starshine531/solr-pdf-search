@@ -21,7 +21,7 @@ $client = new Client(new Curl(), new EventDispatcher(), $config);
 try {
     $query = $client->createSelect();
     $query->setQuery($_GET['q'] ?? '*:*');
-    $query->setFields(['id', 'content']);
+    $query->setFields(['id', 'content', 'subject', 'author', 'keywords', 'date', 'title']);
 
     // Set up highlighting
     $hl = $query->getHighlighting();
@@ -40,8 +40,13 @@ try {
     $highlighting = $resultset->getHighlighting();
 
     foreach ($resultset as $document) {
+        print_r($document);
         echo "ID: " . $document->id . "\n\n";
-        
+        echo "Title: " . $document->title . "\n\n";
+        echo "Author: " . $document->author . "\n\n";
+        echo "Subject: " . $document->subject . "\n\n";
+        echo "Keywords: " . $document->keywords . "\n\n";
+        echo "Date: " . $document->date . "\n\n";
         // Get highlighted snippet if available, otherwise use regular content
         $highlightedDoc = $highlighting->getResult($document->id);
         if ($highlightedDoc && !empty($highlightedDoc->getField('content'))) {

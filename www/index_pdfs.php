@@ -43,10 +43,15 @@ foreach ($regex as $file) {
 
     $extract->addParam('fmap.content', 'content');
     $extract->addParam('fmap.title', 'title');
-    // $extract->addParam('fmap.ignore', '*');
+    $extract->addParam('fmap.author', 'author');
+    $extract->addParam('fmap.subject', 'subject');
+    $extract->addParam('fmap.keywords', 'keywords');
+    $extract->addParam('fmap.date', 'date');
+    $extract->addParam('fmap.ignore', '*');
 
     try {
         $result = $client->extract($extract);
+        //print_r($result);
         echo "Indexed: " . $filePath . " with ID: " . $id . "\n";
     } catch (Exception $e) {
         echo "Error indexing " . $filePath . ": " . $e->getMessage() . "\n";

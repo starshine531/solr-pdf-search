@@ -16,11 +16,16 @@
   </fieldType>
 
   <field name="id" type="string" indexed="true" stored="true" required="true"/>
-  <field name="title" type="text_general" indexed="true" stored="true"/>
   <field name="content" type="text_general" indexed="true" stored="true"/>
+  <field name="title" type="text_general" indexed="true" stored="true"/>
+  <field name="author" type="text_general" indexed="true" stored="true"/>
+  <field name="subject" type="text_general" indexed="true" stored="true"/>
+  <field name="keywords" type="text_general" indexed="true" stored="true"/>
+  <field name="date" type="text_general" indexed="true" stored="true"/>
+  
   <field name="_version_" type="long" indexed="true" stored="true"/>
 
-  <dynamicField name="ignored_*" type="string" indexed="false" stored="true"/>
+  <dynamicField name="ignored_*" type="string" indexed="false" stored="true" multiValue="true" />
 
   <uniqueKey>id</uniqueKey>
 </schema>
